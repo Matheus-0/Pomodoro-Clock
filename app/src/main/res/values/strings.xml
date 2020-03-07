@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Pomodoro Clock</string>
+    <string name="button_on">Resume</string>
+    <string name="button_off">Pause</string>
+    <string name="button_reset">Reset</string>
+    <string name="working_timer_option">Set working time</string>
+    <string name="break_timer_option">Set break time</string>
+</resources>

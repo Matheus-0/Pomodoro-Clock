@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/workingTimerOption"
+        android:title="@string/working_timer_option" />
+    <item
+        android:id="@+id/breakTimerOption"
+        android:title="@string/break_timer_option" />
+</menu>
