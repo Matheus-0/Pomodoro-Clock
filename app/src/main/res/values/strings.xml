@@ -5,4 +5,6 @@
     <string name="button_reset">Reset</string>
     <string name="working_timer_option">Set working time</string>
     <string name="break_timer_option">Set break time</string>
+    <string name="time">%1$s:%2$s</string>
+    <string name="default_time">25:00</string>
 </resources>

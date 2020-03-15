@@ -26,22 +26,22 @@
         android:id="@+id/toggleButton"
         android:layout_width="65dp"
         android:layout_height="65dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/ic_round_circle"
-        android:backgroundTint="@color/colorPrimary"
+        android:backgroundTint="#3F51B5"
         android:textColor="#FFFFFF"
         android:textOff="@string/button_off"
         android:textOn="@string/button_on"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="monospace"
-        android:text="25:00"
+        android:text="@string/default_time"
         android:textColor="#FFFFFF"
         android:textSize="36sp"
         app:layout_constraintBottom_toBottomOf="@+id/progressBar"
@@ -57,6 +57,7 @@
         android:layout_marginBottom="16dp"
         android:background="@drawable/ic_round_circle"
         android:backgroundTint="@android:color/holo_red_light"
+        android:onClick="startTimer"
         android:text="@string/button_reset"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
