@@ -1,2 +1,2 @@
 # Pomodoro Clock
-A simple app for practicing Android development.
+A simple app made in Java for practicing Android development.
