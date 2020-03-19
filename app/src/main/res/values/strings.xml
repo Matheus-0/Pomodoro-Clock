@@ -1,10 +1,11 @@
 <resources>
     <string name="app_name">Pomodoro Clock</string>
-    <string name="button_on">Resume</string>
-    <string name="button_off">Pause</string>
+    <string name="button_play">Resume</string>
+    <string name="button_pause">Pause</string>
     <string name="button_reset">Reset</string>
     <string name="working_timer_option">Set working time</string>
     <string name="break_timer_option">Set break time</string>
     <string name="time">%1$s:%2$s</string>
     <string name="default_time">25:00</string>
+    <string name="button_default">Start</string>
 </resources>
