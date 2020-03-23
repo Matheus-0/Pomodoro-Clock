@@ -3,8 +3,12 @@ package com.example.pomodoroclock;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -24,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     CountDownTimer timer;
     ProgressBar timerProgressBar;
     TextView timerText;
+    Vibrator v;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         resetButton = findViewById(R.id.resetButton);
         timerProgressBar = findViewById(R.id.progressBar);
         timerText = findViewById(R.id.textView);
+        v = (Vibrator) getSystemService(VIBRATOR_SERVICE);
 
         if(!isBreak) defineProgress(startTime);
         else defineProgress(breakTime);
@@ -98,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
                     millisLeft = startTime;
                     isBreak = false;
                 }
+                v.vibrate(1000);
                 startTimer();
             }
         }.start();
