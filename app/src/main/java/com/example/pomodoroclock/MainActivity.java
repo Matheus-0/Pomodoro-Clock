@@ -16,6 +16,7 @@ import java.util.concurrent.TimeUnit;
 public class MainActivity extends AppCompatActivity {
     boolean isThereTimer = false;
     boolean isTimeRunning = false;
+    boolean isBreak = false;
     long startTime = 60000;
     long breakTime = 25000;
     long millisLeft = startTime;
@@ -34,15 +35,14 @@ public class MainActivity extends AppCompatActivity {
         timerProgressBar = findViewById(R.id.progressBar);
         timerText = findViewById(R.id.textView);
 
-        timerProgressBar.setProgress(100);
+        if(!isBreak) defineProgress(startTime);
+        else defineProgress(breakTime);
 
         resumePauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isTimeRunning)
-                    pauseTimer();
-                else
-                    startTimer();
+                if (isTimeRunning) pauseTimer();
+                else startTimer();
             }
         });
 
@@ -54,6 +54,17 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void defineProgress(long var){
+        if(!isBreak){
+            timerProgressBar.setMax((int) TimeUnit.MILLISECONDS.toSeconds(var));
+            timerProgressBar.setProgress(timerProgressBar.getMax());
+        }
+        else{
+            timerProgressBar.setMax((int) TimeUnit.MILLISECONDS.toSeconds(var));
+            timerProgressBar.setProgress(timerProgressBar.getMax());
+        }
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.options, menu);
@@ -62,15 +73,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startTimer() {
-        if(millisLeft == breakTime){
-            timerProgressBar.setMax((int) TimeUnit.MILLISECONDS.toSeconds(breakTime));
-            timerProgressBar.setProgress(timerProgressBar.getMax());
-        }
-        else{
-            timerProgressBar.setMax((int) TimeUnit.MILLISECONDS.toSeconds(startTime));
-            timerProgressBar.setProgress(timerProgressBar.getMax());
-        }
-
+        if(!isBreak) defineProgress(startTime);
+        else defineProgress(breakTime);
 
         isThereTimer = true;
         isTimeRunning = true;
@@ -80,14 +84,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTick(long millisUntilFinished) {
                 millisLeft = millisUntilFinished;
-
                 updateTimerProgress();
             }
 
             @Override
             public void onFinish() {
                 resetTimer();
-                millisLeft = breakTime;
+                if(!isBreak) {
+                    millisLeft = breakTime;
+                    isBreak = true;
+                }
+                else {
+                    millisLeft = startTime;
+                    isBreak = false;
+                }
                 startTimer();
             }
         }.start();
@@ -110,7 +120,8 @@ public class MainActivity extends AppCompatActivity {
         if (isThereTimer)
             destroyTimer();
 
-        millisLeft = startTime;
+        if(!isBreak) millisLeft = startTime;
+        else millisLeft = breakTime;
 
         updateTimerProgress();
         resetResumePauseButton();
@@ -142,6 +153,7 @@ public class MainActivity extends AppCompatActivity {
         outState.putBoolean("isThereTimer", isThereTimer);
         outState.putBoolean("isTimeRunning", isTimeRunning);
         outState.putLong("millisLeft", millisLeft);
+        outState.putBoolean("isBreak", isBreak);
     }
 
     @Override
@@ -151,6 +163,7 @@ public class MainActivity extends AppCompatActivity {
         isThereTimer = savedInstanceState.getBoolean("isThereTimer");
         isTimeRunning = savedInstanceState.getBoolean("isTimeRunning");
         millisLeft = savedInstanceState.getLong("millisLeft");
+        isBreak = savedInstanceState.getBoolean("isBreak");
 
         updateTimerProgress();
         updateResumePauseButton();
