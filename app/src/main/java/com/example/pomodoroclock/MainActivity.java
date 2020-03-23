@@ -18,11 +18,9 @@ public class MainActivity extends AppCompatActivity {
     boolean isTimeRunning = false;
     long startTime = 60000;
     long breakTime = 25000;
-    long millisToEndBreak = breakTime;
     long millisLeft = startTime;
     Button resumePauseButton, resetButton;
     CountDownTimer timer;
-    CountDownTimer timerBreak;
     ProgressBar timerProgressBar;
     TextView timerText;
 
@@ -64,8 +62,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startTimer() {
-        timerProgressBar.setMax((int) TimeUnit.MILLISECONDS.toSeconds(startTime));
-        timerProgressBar.setProgress(timerProgressBar.getMax());
+        if(millisLeft == breakTime){
+            timerProgressBar.setMax((int) TimeUnit.MILLISECONDS.toSeconds(breakTime));
+            timerProgressBar.setProgress(timerProgressBar.getMax());
+        }
+        else{
+            timerProgressBar.setMax((int) TimeUnit.MILLISECONDS.toSeconds(startTime));
+            timerProgressBar.setProgress(timerProgressBar.getMax());
+        }
+
 
         isThereTimer = true;
         isTimeRunning = true;
@@ -82,30 +87,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFinish() {
                 resetTimer();
-                starBreak();
-            }
-        }.start();
-
-        updateResumePauseButton();
-    }
-
-    private void starBreak(){
-        timerProgressBar.setMax((int) TimeUnit.MILLISECONDS.toSeconds(breakTime));
-        timerProgressBar.setProgress(timerProgressBar.getMax());
-
-        isThereTimer = true;
-        isTimeRunning = true;
-
-        timerBreak = new CountDownTimer(millisToEndBreak, 100) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                millisToEndBreak = millisUntilFinished;
-                updateTimerProgressBreak();
-            }
-
-            @Override
-            public void onFinish() {
-                resetTimer();
+                millisLeft = breakTime;
                 startTimer();
             }
         }.start();
@@ -115,7 +97,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void destroyTimer() {
         timer.cancel();
-
         isThereTimer = false;
         isTimeRunning = false;
     }
@@ -133,17 +114,6 @@ public class MainActivity extends AppCompatActivity {
 
         updateTimerProgress();
         resetResumePauseButton();
-    }
-
-    private void updateTimerProgressBreak(){
-        String second = String.valueOf(TimeUnit.MILLISECONDS.toSeconds(millisToEndBreak) % 60);
-        String minute = String.valueOf(TimeUnit.MILLISECONDS.toMinutes(millisToEndBreak) % 60);
-
-        if (Integer.parseInt(second) < 10)
-            second = "0" + second;
-
-        timerText.setText(getString(R.string.time, minute, second));
-        timerProgressBar.setProgress((int) TimeUnit.MILLISECONDS.toSeconds(millisToEndBreak));
     }
 
     private void updateTimerProgress() {
