@@ -7,7 +7,6 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
-import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -37,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         timerProgressBar = findViewById(R.id.progressBar);
         timerText = findViewById(R.id.textView);
         vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-        mediaPlayer = MediaPlayer.create(this, R.raw.corona_vairus);
+        mediaPlayer = MediaPlayer.create(this, R.raw.consequence);
 
         defineProgress();
 
@@ -164,7 +163,9 @@ public class MainActivity extends AppCompatActivity {
 
         defineProgress();
         updateTimerProgress();
-        updateResumePauseButton();
+
+        if (millisLeft != startTime)
+            updateResumePauseButton();
 
         if (isTimeRunning)
             startTimer();
