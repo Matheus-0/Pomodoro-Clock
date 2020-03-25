@@ -3,9 +3,11 @@ package com.example.pomodoroclock;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
+import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -16,13 +18,14 @@ import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
     boolean isTimeRunning = false, isBreak = false;
-    long startTime = 10000, breakTime = 5000;
+    long startTime = 20000, breakTime = 15000;
     long millisLeft = startTime;
     Button resumePauseButton, resetButton;
     CountDownTimer timer;
     ProgressBar timerProgressBar;
     TextView timerText;
     Vibrator vibrator;
+    MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         timerProgressBar = findViewById(R.id.progressBar);
         timerText = findViewById(R.id.textView);
         vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+        mediaPlayer = MediaPlayer.create(this, R.raw.corona_vairus);
 
         defineProgress();
 
@@ -87,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
                     isBreak = false;
                 }
 
+                mediaPlayer.start();
                 vibrator.vibrate(1000);
 
                 defineProgress();
