@@ -9,7 +9,7 @@ import android.os.CountDownTimer;
 import android.os.Vibrator;
 import android.view.Menu;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     boolean isTimeRunning = false, isBreak = false;
     long startTime = 20000, breakTime = 15000;
     long millisLeft = startTime;
-    Button resumePauseButton, resetButton;
+    ImageButton resumePauseButton, resetButton;
     CountDownTimer timer;
     ProgressBar timerProgressBar;
     TextView timerText;
@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
         else millisLeft = breakTime;
 
         updateTimerProgress();
-        resetResumePauseButton();
+        updateResumePauseButton();
     }
 
     private void updateTimerProgress() {
@@ -134,11 +134,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateResumePauseButton() {
-        resumePauseButton.setText(getString((isTimeRunning) ? R.string.button_pause : R.string.button_play));
-    }
-
-    private void resetResumePauseButton() {
-        resumePauseButton.setText(getString(R.string.button_default));
+        resumePauseButton.setImageResource(isTimeRunning ? R.drawable.baseline_pause_24 : R.drawable.baseline_play_arrow_24);
     }
 
     @Override

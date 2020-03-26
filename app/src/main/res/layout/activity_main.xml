@@ -35,28 +35,30 @@
         app:layout_constraintStart_toStartOf="@+id/progressBar"
         app:layout_constraintTop_toTopOf="@+id/progressBar" />
 
-    <Button
+    <ImageButton
         android:id="@+id/resetButton"
         android:layout_width="65dp"
         android:layout_height="65dp"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/ic_round_circle"
-        android:backgroundTint="@android:color/holo_blue_dark"
-        android:text="@string/button_reset"
+        android:backgroundTint="#2196F3"
+        android:contentDescription="@string/button_reset"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/baseline_stop_24" />
 
-    <Button
+    <ImageButton
         android:id="@+id/resumePauseButton"
         android:layout_width="65dp"
         android:layout_height="65dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/ic_round_circle"
-        android:backgroundTint="@android:color/holo_red_light"
-        android:text="@string/button_default"
+        android:backgroundTint="#F44336"
+        android:contentDescription="@string/button_default"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/baseline_play_arrow_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
