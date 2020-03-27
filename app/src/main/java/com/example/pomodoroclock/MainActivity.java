@@ -81,24 +81,24 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                if (!isBreak) {
-                    millisLeft = breakTime;
-                    isBreak = true;
-                }
-                else {
-                    millisLeft = startTime;
-                    isBreak = false;
-                }
-
-                mediaPlayer.start();
-                vibrator.vibrate(1000);
-
+                alertTimerFinish();
+                changeTimerType();
                 defineProgress();
                 startTimer();
             }
         }.start();
 
         updateResumePauseButton();
+    }
+
+    private void alertTimerFinish() {
+        mediaPlayer.start();
+        vibrator.vibrate(1000);
+    }
+
+    private void changeTimerType() {
+        millisLeft = (!isBreak) ? breakTime : startTime;
+        isBreak = !isBreak;
     }
 
     private void destroyTimer() {
@@ -115,8 +115,7 @@ public class MainActivity extends AppCompatActivity {
         if (isTimeRunning)
             destroyTimer();
 
-        if (!isBreak) millisLeft = startTime;
-        else millisLeft = breakTime;
+        millisLeft = (!isBreak) ? startTime : breakTime;
 
         updateTimerProgress();
         updateResumePauseButton();
