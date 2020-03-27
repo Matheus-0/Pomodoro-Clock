@@ -6,6 +6,7 @@
     <string name="working_timer_option">Set working time</string>
     <string name="break_timer_option">Set break time</string>
     <string name="time">%1$s:%2$s</string>
+    <string name="hour_time">%1$s:%2$s:%3$s</string>
     <string name="default_time">25:00</string>
     <string name="button_default">Start</string>
 </resources>

@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
     boolean isTimeRunning = false, isBreak = false;
-    long startTime = 20000, breakTime = 15000;
+    long startTime = 25000, breakTime = 15000;
     long millisLeft = startTime;
     ImageButton resumePauseButton, resetButton;
     CountDownTimer timer;
@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         mediaPlayer = MediaPlayer.create(this, R.raw.consequence);
 
         defineProgress();
+        updateTimerProgress();
 
         resumePauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,11 +125,20 @@ public class MainActivity extends AppCompatActivity {
     private void updateTimerProgress() {
         String second = String.valueOf(TimeUnit.MILLISECONDS.toSeconds(millisLeft) % 60);
         String minute = String.valueOf(TimeUnit.MILLISECONDS.toMinutes(millisLeft) % 60);
+        String hour = String.valueOf(TimeUnit.MILLISECONDS.toHours(millisLeft) % 24);
 
+        int hourInt = Integer.parseInt(hour);
+
+        if (Integer.parseInt(minute) < 10 && hourInt > 0)
+            minute = "0" + minute;
         if (Integer.parseInt(second) < 10)
             second = "0" + second;
 
-        timerText.setText(getString(R.string.time, minute, second));
+        if (hourInt > 0)
+            timerText.setText(getString(R.string.hour_time, hour, minute, second));
+        else
+            timerText.setText(getString(R.string.time, minute, second));
+
         timerProgressBar.setProgress((int) TimeUnit.MILLISECONDS.toSeconds(millisLeft));
     }
 
