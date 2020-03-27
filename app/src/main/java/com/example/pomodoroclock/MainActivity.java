@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
     private void startTimer() {
         isTimeRunning = true;
 
-        timer = new CountDownTimer(millisLeft, 10) {
+        timer = new CountDownTimer(millisLeft, 100) {
 
             @Override
             public void onTick(long millisUntilFinished) {
