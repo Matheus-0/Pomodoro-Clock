@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -19,7 +18,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
@@ -33,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     Vibrator vibrator;
     MediaPlayer mediaPlayer;
     Dialog myDialog;
-    Button btnClosing, btn4;
+    // Button btnClosing, btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,31 +78,32 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.workingTimerOption:
                 final AlertDialog.Builder mBuilder = new AlertDialog.Builder(MainActivity.this);
                 final View mView = getLayoutInflater().inflate(R.layout.working_time, null);
-                Button btn1 = (Button)mView.findViewById(R.id.btnTeste);
+                Button btnTest = mView.findViewById(R.id.btnTest);
 
-                btn1.setOnClickListener(new View.OnClickListener() {
+                btnTest.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Toast.makeText(MainActivity.this, "Okay", Toast.LENGTH_SHORT).show();
                     }
                 });
+
                 mBuilder.setView(mView);
                 AlertDialog dialog = mBuilder.create();
                 dialog.show();
                 Toast.makeText(this, "Okay", Toast.LENGTH_SHORT).show();
+
                 return true;
             case R.id.breakTimerOption:
                 Toast.makeText(this, "Okay", Toast.LENGTH_SHORT).show();
+
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
-
-
 
     /*
     private void showDialog() {
@@ -118,8 +117,7 @@ public class MainActivity extends AppCompatActivity {
         });
         myDialog.show();
     }
-
-     */
+    */
 
     private void startTimer() {
         isTimeRunning = true;
