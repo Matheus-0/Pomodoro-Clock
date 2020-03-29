@@ -28,7 +28,6 @@ public class SetWorkingTimeActivity extends AppCompatActivity {
         seconds = findViewById(R.id.secondBox);
         btn = findViewById(R.id.setTime);
         workingViewer = findViewById(R.id.workingTimeView);
-        workingViewer.setImageResource(R.drawable.baseline_timelapse_24);
 
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             workingViewer.getLayoutParams().height = 500;

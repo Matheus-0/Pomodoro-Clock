@@ -9,12 +9,13 @@
         android:id="@+id/setBreakTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/done_button"
         android:text="@string/done_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.735" />
+        app:layout_constraintVertical_bias="0.8" />
 
     <EditText
         android:id="@+id/minutesBreakBox"
@@ -58,14 +59,14 @@
 
     <ImageView
         android:id="@+id/breakTimeView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_marginBottom="30dp"
         android:contentDescription="@string/worker_icon"
         app:layout_constraintBottom_toTopOf="@+id/minutesBreakBox"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.500"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@mipmap/ic_launcher" />
+        app:srcCompat="@drawable/baseline_free_breakfast_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
