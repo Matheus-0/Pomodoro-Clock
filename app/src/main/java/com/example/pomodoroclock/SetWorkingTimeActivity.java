@@ -28,14 +28,15 @@ public class SetWorkingTimeActivity extends AppCompatActivity {
         seconds = findViewById(R.id.secondBox);
         btn = findViewById(R.id.setTime);
         workingViewer = findViewById(R.id.workingTimeView);
-        workingViewer.setImageResource(R.drawable.working_time_icon);
+        workingViewer.setImageResource(R.drawable.baseline_timelapse_24);
 
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
-            workingViewer.getLayoutParams().height = 400;
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            workingViewer.getLayoutParams().height = 500;
+            workingViewer.getLayoutParams().width = 500;
+        }
         else {
             workingViewer.getLayoutParams().height = 200;
-            workingViewer.setX(20);
-            workingViewer.setY(70);
+            workingViewer.getLayoutParams().width = 200;
         }
 
         long startTime = Objects.requireNonNull(getIntent().getExtras()).getLong("hours");
