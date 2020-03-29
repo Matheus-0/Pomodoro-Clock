@@ -76,13 +76,17 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.workingTimerOption:
                 Intent myIntent = new Intent(MainActivity.this, SetWorkingTimeActivity.class);
+
                 myIntent.putExtra("hours", startTime);
                 startActivity(myIntent);
+
                 Toast.makeText(this, "Okay", Toast.LENGTH_SHORT).show();
+
                 return true;
             case R.id.breakTimerOption:
             case R.id.setSound:
                 Toast.makeText(this, "Okay", Toast.LENGTH_SHORT).show();
+
                 return true;
         }
         return super.onOptionsItemSelected(item);
