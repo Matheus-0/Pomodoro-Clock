@@ -3,8 +3,7 @@ package com.example.pomodoroclock;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -12,7 +11,6 @@ import android.os.Vibrator;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -22,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
     boolean isTimeRunning = false, isBreak = false;
-    long startTime = 25000, breakTime = 15000;
+    long startTime = 30000, breakTime = 15000;
     long millisLeft = startTime;
     ImageButton resumePauseButton, resetButton;
     CountDownTimer timer;
@@ -30,8 +28,6 @@ public class MainActivity extends AppCompatActivity {
     TextView timerText;
     Vibrator vibrator;
     MediaPlayer mediaPlayer;
-    Dialog myDialog;
-    // Button btnClosing, btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
         timerText = findViewById(R.id.textView);
         vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
         mediaPlayer = MediaPlayer.create(this, R.raw.consequence);
-        myDialog = new Dialog(this);
 
         defineProgress();
         updateTimerProgress();
@@ -80,44 +75,18 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.workingTimerOption:
-                final AlertDialog.Builder mBuilder = new AlertDialog.Builder(MainActivity.this);
-                final View mView = getLayoutInflater().inflate(R.layout.working_time, null);
-                Button btnTest = mView.findViewById(R.id.btnTest);
-
-                btnTest.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(MainActivity.this, "Okay", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-                mBuilder.setView(mView);
-                AlertDialog dialog = mBuilder.create();
-                dialog.show();
+                Intent myIntent = new Intent(MainActivity.this, SetWorkingTimeActivity.class);
+                myIntent.putExtra("hours", startTime);
+                startActivity(myIntent);
                 Toast.makeText(this, "Okay", Toast.LENGTH_SHORT).show();
-
                 return true;
             case R.id.breakTimerOption:
+            case R.id.setSound:
                 Toast.makeText(this, "Okay", Toast.LENGTH_SHORT).show();
-
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
-
-    /*
-    private void showDialog() {
-        myDialog.setContentView(R.layout.working_time);
-        btnClosing = (Button)myDialog.findViewById(R.id.btnClose);
-        btnClosing.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                myDialog.dismiss();
-            }
-        });
-        myDialog.show();
-    }
-    */
 
     private void startTimer() {
         isTimeRunning = true;
