@@ -13,16 +13,17 @@
         android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.499"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.763" />
+        app:layout_constraintVertical_bias="0.734" />
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/minutesBox"
         android:layout_width="87dp"
         android:layout_height="45dp"
         android:ems="10"
+        android:hint="Minutes"
         android:inputType="number"
         app:layout_constraintBottom_toTopOf="@+id/setTime"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,44 +33,56 @@
         app:layout_constraintVertical_bias="0.828" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/hoursBox"
         android:layout_width="87dp"
         android:layout_height="45dp"
         android:layout_marginEnd="30dp"
         android:ems="10"
+        android:hint="Hours"
         android:inputType="number"
-        app:layout_constraintBottom_toBottomOf="@+id/editText4"
-        app:layout_constraintEnd_toStartOf="@+id/editText4"
+        app:layout_constraintBottom_toBottomOf="@+id/minutesBox"
+        app:layout_constraintEnd_toStartOf="@+id/minutesBox"
         app:layout_constraintHorizontal_bias="0.955"
-        app:layout_constraintStart_toEndOf="@+id/editText4"
-        app:layout_constraintTop_toTopOf="@+id/editText4"
+        app:layout_constraintStart_toEndOf="@+id/minutesBox"
+        app:layout_constraintTop_toTopOf="@+id/minutesBox"
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/time2"
+        android:id="@+id/secondBox"
         android:layout_width="87dp"
         android:layout_height="45dp"
         android:layout_marginStart="24dp"
         android:ems="10"
+        android:hint="Seconds"
         android:inputType="number"
-        app:layout_constraintBottom_toBottomOf="@+id/editText4"
-        app:layout_constraintEnd_toStartOf="@+id/editText4"
+        app:layout_constraintBottom_toBottomOf="@+id/minutesBox"
+        app:layout_constraintEnd_toStartOf="@+id/minutesBox"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/editText4"
-        app:layout_constraintTop_toTopOf="@+id/editText4"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintStart_toEndOf="@+id/minutesBox"
+        app:layout_constraintTop_toTopOf="@+id/minutesBox"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/workingTimeView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="28dp"
-        app:layout_constraintBottom_toTopOf="@+id/editText4"
+        app:layout_constraintBottom_toTopOf="@+id/minutesBox"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.499"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@mipmap/ic_launcher" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/setTime" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
