@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
-public class SetWorkingTimeActivity extends AppCompatActivity {
+public class SetTimeActivity extends AppCompatActivity {
 
     EditText hours, minutes, seconds;
     Button btn;

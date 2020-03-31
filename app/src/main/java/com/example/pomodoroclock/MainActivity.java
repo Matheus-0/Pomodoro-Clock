@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
@@ -20,26 +19,27 @@ import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
     boolean isTimeRunning = false, isBreak = false;
-    long startTime = 30000, breakTime = 15000;
+    long startTime, breakTime;
     long millisLeft = startTime;
     ImageButton resumePauseButton, resetButton;
     CountDownTimer timer;
     ProgressBar timerProgressBar;
     TextView timerText;
     Vibrator vibrator;
-    MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if (startTime == 0)
+            startTime = breakTime = 25000;
+
         resumePauseButton = findViewById(R.id.resumePauseButton);
         resetButton = findViewById(R.id.resetButton);
         timerProgressBar = findViewById(R.id.progressBar);
         timerText = findViewById(R.id.textView);
         vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-        mediaPlayer = MediaPlayer.create(this, R.raw.consequence);
 
         defineProgress();
         updateTimerProgress();
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.workingTimerOption:
-                Intent myIntent = new Intent(MainActivity.this, SetWorkingTimeActivity.class);
+                Intent myIntent = new Intent(MainActivity.this, SetTimeActivity.class);
 
                 myIntent.putExtra("hours", startTime);
                 startActivity(myIntent);
@@ -116,7 +116,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void alertTimerFinish() {
-        mediaPlayer.start();
         vibrator.vibrate(1000);
     }
 
