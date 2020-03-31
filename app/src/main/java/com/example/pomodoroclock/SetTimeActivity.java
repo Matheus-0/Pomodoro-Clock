@@ -2,8 +2,12 @@ package com.example.pomodoroclock;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -12,50 +16,84 @@ import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class SetTimeActivity extends AppCompatActivity {
-
+    String key;
     EditText hours, minutes, seconds;
     Button btn;
-    ImageView workingViewer;
+    ImageView viewer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.working_time);
+        setContentView(R.layout.set_time);
 
         hours = findViewById(R.id.hoursBox);
         minutes = findViewById(R.id.minutesBox);
         seconds = findViewById(R.id.secondBox);
         btn = findViewById(R.id.setTime);
-        workingViewer = findViewById(R.id.workingTimeView);
+        viewer = findViewById(R.id.workingTimeView);
+
+        if (Objects.requireNonNull(this.getIntent().getExtras()).getInt("requestCode") == 10)
+            key = "startTimeSet";
+        else {
+            viewer.setImageResource(R.drawable.baseline_free_breakfast_24);
+            key = "breakTimeSet";
+        }
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                long x, y, z;
+
+                Editable hoursText = hours.getText();
+                Editable minutesText = minutes.getText();
+                Editable secondsText = seconds.getText();
+
+                boolean any = false;
+                String errorMessage = getString(R.string.error_edit_text);
+
+                if (TextUtils.isEmpty(hoursText)) {
+                    hours.setError(errorMessage);
+                    any = true;
+                }
+                if (TextUtils.isEmpty(minutesText)) {
+                    minutes.setError(errorMessage);
+                    any = true;
+                }
+                if (TextUtils.isEmpty(secondsText)) {
+                    seconds.setError(errorMessage);
+                    any = true;
+                }
+
+                if (!any) {
+                    x = TimeUnit.HOURS.toMillis(Long.parseLong(hoursText.toString()));
+                    y = TimeUnit.MINUTES.toMillis(Long.parseLong(minutesText.toString()));
+                    z = TimeUnit.SECONDS.toMillis(Long.parseLong(secondsText.toString()));
+
+                    SharedPreferences.Editor editor = getSharedPreferences("times", MODE_PRIVATE).edit();
+
+                    editor.putLong(key, x + y + z);
+                    editor.apply();
+
+                    setResult(RESULT_OK);
+                    finish();
+                }
+            }
+        });
 
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-            workingViewer.getLayoutParams().height = 500;
-            workingViewer.getLayoutParams().width = 500;
+            viewer.getLayoutParams().height = 500;
+            viewer.getLayoutParams().width = 500;
         }
         else {
-            workingViewer.getLayoutParams().height = 200;
-            workingViewer.getLayoutParams().width = 200;
+            viewer.getLayoutParams().height = 200;
+            viewer.getLayoutParams().width = 200;
         }
 
-        long startTime = Objects.requireNonNull(getIntent().getExtras()).getLong("hours");
-
-        setHints(startTime);
         onStart();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-    }
-
-    public void setHints(long value) {
-        String second = String.valueOf(TimeUnit.MILLISECONDS.toSeconds(value) % 60);
-        String minute = String.valueOf(TimeUnit.MILLISECONDS.toMinutes(value) % 60);
-        String hour = String.valueOf(TimeUnit.MILLISECONDS.toHours(value) % 24);
-
-        hours.setHint(hour);
-        minutes.setHint(minute);
-        seconds.setHint(second);
     }
 }

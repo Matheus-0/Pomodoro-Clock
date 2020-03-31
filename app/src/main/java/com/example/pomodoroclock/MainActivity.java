@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
@@ -19,11 +20,14 @@ import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
     boolean isTimeRunning = false, isBreak = false;
+    final static long DEFAULT_WORKING_TIME = 3600000;
+    final static long DEFAULT_BREAK_TIME = 900000;
     long startTime, breakTime;
-    long millisLeft = startTime;
+    long millisLeft;
     ImageButton resumePauseButton, resetButton;
     CountDownTimer timer;
     ProgressBar timerProgressBar;
+    SharedPreferences settings;
     TextView timerText;
     Vibrator vibrator;
 
@@ -32,14 +36,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (startTime == 0)
-            startTime = breakTime = 25000;
-
         resumePauseButton = findViewById(R.id.resumePauseButton);
         resetButton = findViewById(R.id.resetButton);
         timerProgressBar = findViewById(R.id.progressBar);
         timerText = findViewById(R.id.textView);
         vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+
+        settings = getApplicationContext().getSharedPreferences("times", MODE_PRIVATE);
+
+        startTime = settings.getLong("startTimeSet", DEFAULT_WORKING_TIME);
+        breakTime = settings.getLong("breakTimeSet", DEFAULT_BREAK_TIME);
+
+        millisLeft = (isBreak) ? breakTime : startTime;
 
         defineProgress();
         updateTimerProgress();
@@ -60,11 +68,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void defineProgress() {
-        timerProgressBar.setMax((int) TimeUnit.MILLISECONDS.toSeconds((isBreak) ? breakTime : startTime));
-        timerProgressBar.setProgress(timerProgressBar.getMax());
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.options, menu);
@@ -77,19 +80,74 @@ public class MainActivity extends AppCompatActivity {
             case R.id.workingTimerOption:
                 Intent myIntent = new Intent(MainActivity.this, SetTimeActivity.class);
 
-                myIntent.putExtra("hours", startTime);
-                startActivity(myIntent);
-
-                Toast.makeText(this, "Okay", Toast.LENGTH_SHORT).show();
+                myIntent.putExtra("millis", startTime);
+                myIntent.putExtra("requestCode", 10);
+                startActivityForResult(myIntent, 10);
 
                 return true;
             case R.id.breakTimerOption:
+                Intent breakIntent = new Intent(MainActivity.this, SetTimeActivity.class);
+
+                breakIntent.putExtra("millis", breakTime);
+                breakIntent.putExtra("requestCode", 20);
+                startActivityForResult(breakIntent, 20);
+
+
+                return true;
             case R.id.setSound:
                 Toast.makeText(this, "Okay", Toast.LENGTH_SHORT).show();
 
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putBoolean("isTimeRunning", isTimeRunning);
+        outState.putLong("millisLeft", millisLeft);
+        outState.putBoolean("isBreak", isBreak);
+
+        if (isTimeRunning)
+            destroyTimer();
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        isTimeRunning = savedInstanceState.getBoolean("isTimeRunning");
+        millisLeft = savedInstanceState.getLong("millisLeft");
+        isBreak = savedInstanceState.getBoolean("isBreak");
+
+        defineProgress();
+        updateTimerProgress();
+
+        if (millisLeft != startTime)
+            updateResumePauseButton();
+
+        if (isTimeRunning)
+            startTimer();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+            if (requestCode == 10) {
+                startTime = settings.getLong("startTimeSet", DEFAULT_WORKING_TIME);
+                resetTimer();
+                defineProgress();
+            }
+            else if (requestCode == 20) {
+                breakTime = settings.getLong("breakTimeSet", DEFAULT_BREAK_TIME);
+                resetTimer();
+                defineProgress();
+            }
+        }
     }
 
     private void startTimer() {
@@ -113,6 +171,11 @@ public class MainActivity extends AppCompatActivity {
         }.start();
 
         updateResumePauseButton();
+    }
+
+    public void defineProgress() {
+        timerProgressBar.setMax((int) TimeUnit.MILLISECONDS.toSeconds((isBreak) ? breakTime : startTime));
+        timerProgressBar.setProgress(timerProgressBar.getMax());
     }
 
     private void alertTimerFinish() {
@@ -147,7 +210,7 @@ public class MainActivity extends AppCompatActivity {
     private void updateTimerProgress() {
         String second = String.valueOf(TimeUnit.MILLISECONDS.toSeconds(millisLeft) % 60);
         String minute = String.valueOf(TimeUnit.MILLISECONDS.toMinutes(millisLeft) % 60);
-        String hour = String.valueOf(TimeUnit.MILLISECONDS.toHours(millisLeft) % 24);
+        String hour = String.valueOf(TimeUnit.MILLISECONDS.toHours(millisLeft));
 
         int hourInt = Integer.parseInt(hour);
 
@@ -166,35 +229,5 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateResumePauseButton() {
         resumePauseButton.setImageResource(isTimeRunning ? R.drawable.baseline_pause_24 : R.drawable.baseline_play_arrow_24);
-    }
-
-    @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-
-        outState.putBoolean("isTimeRunning", isTimeRunning);
-        outState.putLong("millisLeft", millisLeft);
-        outState.putBoolean("isBreak", isBreak);
-
-        if (isTimeRunning)
-            destroyTimer();
-    }
-
-    @Override
-    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-
-        isTimeRunning = savedInstanceState.getBoolean("isTimeRunning");
-        millisLeft = savedInstanceState.getLong("millisLeft");
-        isBreak = savedInstanceState.getBoolean("isBreak");
-
-        defineProgress();
-        updateTimerProgress();
-
-        if (millisLeft != startTime)
-            updateResumePauseButton();
-
-        if (isTimeRunning)
-            startTimer();
     }
 }
