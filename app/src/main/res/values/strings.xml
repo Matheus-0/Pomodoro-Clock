@@ -16,4 +16,5 @@
     <string name="second_hint">Seconds</string>
     <string name="worker_icon">Worker</string>
     <string name="error_edit_text">Can\'t be all empty!</string>
+    <string name="all_zeros">Fields can\'t be all zeros</string>
 </resources>

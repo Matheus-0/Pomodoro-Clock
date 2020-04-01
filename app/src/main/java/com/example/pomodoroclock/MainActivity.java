@@ -16,12 +16,13 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
     boolean isTimeRunning = false, isBreak = false, firstTime = true;
-    static long DEFAULT_WORKING_TIME, DEFAULT_BREAK_TIME;
-    long startTime, breakTime, millisLeft;
+    final static long DEFAULT_WORKING_TIME = 1500000, DEFAULT_BREAK_TIME = 300000;
+    static long startTime, breakTime, millisLeft;
     ImageButton resumePauseButton, resetButton;
     CountDownTimer timer;
     ProgressBar timerProgressBar;
@@ -40,15 +41,11 @@ public class MainActivity extends AppCompatActivity {
         timerText = findViewById(R.id.textView);
         vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
 
-        settings = getApplicationContext().getSharedPreferences("times", MODE_PRIVATE);
+        //settings = getApplicationContext().getSharedPreferences("times", MODE_PRIVATE);
 
         if(firstTime){
-            startTime = 5000;
-            breakTime = 2000;
-        }
-        else{
-            startTime = settings.getLong("startTimeSet", DEFAULT_WORKING_TIME);
-            breakTime = settings.getLong("breakTimeSet", DEFAULT_BREAK_TIME);
+            startTime = DEFAULT_WORKING_TIME;
+            breakTime = DEFAULT_BREAK_TIME;
         }
 
         millisLeft = (isBreak) ? breakTime : startTime;
@@ -88,20 +85,19 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.workingTimerOption:
-                Intent myIntent = new Intent(MainActivity.this, SetTimeActivity.class);
+                Intent workIntent = new Intent(MainActivity.this, SetTimeActivity.class);
 
-                myIntent.putExtra("millis", startTime);
-                myIntent.putExtra("requestCode", 10);
-                startActivityForResult(myIntent, 10);
+                workIntent.putExtra("startTime", startTime);
+                workIntent.putExtra("requestCode", 10);
+                startActivityForResult(workIntent, 10);
 
                 return true;
             case R.id.breakTimerOption:
                 Intent breakIntent = new Intent(MainActivity.this, SetTimeActivity.class);
 
-                breakIntent.putExtra("millis", breakTime);
+                breakIntent.putExtra("breakTime", breakTime);
                 breakIntent.putExtra("requestCode", 20);
                 startActivityForResult(breakIntent, 20);
-
 
                 return true;
             case R.id.setSound:
@@ -148,12 +144,12 @@ public class MainActivity extends AppCompatActivity {
 
         if (resultCode == RESULT_OK) {
             if (requestCode == 10) {
-                startTime = settings.getLong("startTimeSet", DEFAULT_WORKING_TIME);
+                startTime = Objects.requireNonNull(data.getExtras()).getLong("startTime");
                 resetTimer();
                 defineProgress();
             }
             else if (requestCode == 20) {
-                breakTime = settings.getLong("breakTimeSet", DEFAULT_BREAK_TIME);
+                breakTime = Objects.requireNonNull(data.getExtras()).getLong("breakTime");
                 resetTimer();
                 defineProgress();
             }

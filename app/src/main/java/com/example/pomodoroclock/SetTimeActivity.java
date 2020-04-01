@@ -2,6 +2,7 @@ package com.example.pomodoroclock;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -66,6 +67,7 @@ public class SetTimeActivity extends AppCompatActivity {
 
                 boolean any = false;
                 String errorMessage = getString(R.string.error_edit_text);
+                String allZeros = getString(R.string.all_zeros);
 
                 if(TextUtils.isEmpty(hoursText) && TextUtils.isEmpty(minutesText) && TextUtils.isEmpty(secondsText)){
                     hours.setError(errorMessage);
@@ -74,17 +76,28 @@ public class SetTimeActivity extends AppCompatActivity {
                     any = true;
                 }
 
+                if(hoursText.toString().equals("0") && minutesText.toString().equals("0") && secondsText.toString().equals("0")){
+                    hours.setError(allZeros);
+                    minutes.setError(allZeros);
+                    seconds.setError(allZeros);
+                    any = true;
+                }
+
                 if (!any) {
                     if(!hoursText.toString().equals("")) x = TimeUnit.HOURS.toMillis(Long.parseLong(hoursText.toString()));
                     if(!minutesText.toString().equals("")) y = TimeUnit.MINUTES.toMillis(Long.parseLong(minutesText.toString()));
                     if(!secondsText.toString().equals("")) z = TimeUnit.SECONDS.toMillis(Long.parseLong(secondsText.toString()));
 
-                    SharedPreferences.Editor editor = getSharedPreferences("times", MODE_PRIVATE).edit();
+                    Intent result = new Intent();
 
-                    editor.putLong(key, x + y + z);
-                    editor.apply();
+                    if(key.equals("startTimeSet")) {
+                        result.putExtra("startTime", x + y + z);
+                    }
+                    else {
+                        result.putExtra("breakTime", x + y + z);
+                    }
 
-                    setResult(RESULT_OK);
+                    setResult(RESULT_OK, result);
                     finish();
                 }
             }
