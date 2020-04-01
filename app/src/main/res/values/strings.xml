@@ -15,5 +15,5 @@
     <string name="minute_hint">Minutes</string>
     <string name="second_hint">Seconds</string>
     <string name="worker_icon">Worker</string>
-    <string name="error_edit_text">Can\'t be empty!</string>
+    <string name="error_edit_text">Can\'t be all empty!</string>
 </resources>

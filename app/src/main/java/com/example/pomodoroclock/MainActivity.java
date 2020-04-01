@@ -20,8 +20,8 @@ import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
     boolean isTimeRunning = false, isBreak = false;
-    final static long DEFAULT_WORKING_TIME = 3600000;
-    final static long DEFAULT_BREAK_TIME = 900000;
+    final static long DEFAULT_WORKING_TIME = 1500000;
+    final static long DEFAULT_BREAK_TIME = 300000;
     long startTime, breakTime;
     long millisLeft;
     ImageButton resumePauseButton, resetButton;

@@ -39,46 +39,6 @@ public class SetTimeActivity extends AppCompatActivity {
             key = "breakTimeSet";
         }
 
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                long x, y, z;
-
-                Editable hoursText = hours.getText();
-                Editable minutesText = minutes.getText();
-                Editable secondsText = seconds.getText();
-
-                boolean any = false;
-                String errorMessage = getString(R.string.error_edit_text);
-
-                if (TextUtils.isEmpty(hoursText)) {
-                    hours.setError(errorMessage);
-                    any = true;
-                }
-                if (TextUtils.isEmpty(minutesText)) {
-                    minutes.setError(errorMessage);
-                    any = true;
-                }
-                if (TextUtils.isEmpty(secondsText)) {
-                    seconds.setError(errorMessage);
-                    any = true;
-                }
-
-                if (!any) {
-                    x = TimeUnit.HOURS.toMillis(Long.parseLong(hoursText.toString()));
-                    y = TimeUnit.MINUTES.toMillis(Long.parseLong(minutesText.toString()));
-                    z = TimeUnit.SECONDS.toMillis(Long.parseLong(secondsText.toString()));
-
-                    SharedPreferences.Editor editor = getSharedPreferences("times", MODE_PRIVATE).edit();
-
-                    editor.putLong(key, x + y + z);
-                    editor.apply();
-
-                    setResult(RESULT_OK);
-                    finish();
-                }
-            }
-        });
 
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             viewer.getLayoutParams().height = 500;
@@ -95,5 +55,39 @@ public class SetTimeActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                long x = 0, y = 0, z = 0;
+
+                Editable hoursText = hours.getText();
+                Editable minutesText = minutes.getText();
+                Editable secondsText = seconds.getText();
+
+                boolean any = false;
+                String errorMessage = getString(R.string.error_edit_text);
+
+                if(TextUtils.isEmpty(hoursText) && TextUtils.isEmpty(minutesText) && TextUtils.isEmpty(secondsText)){
+                    hours.setError(errorMessage);
+                    minutes.setError(errorMessage);
+                    seconds.setError(errorMessage);
+                    any = true;
+                }
+
+                if (!any) {
+                    if(!hoursText.toString().equals("")) x = TimeUnit.HOURS.toMillis(Long.parseLong(hoursText.toString()));
+                    if(!minutesText.toString().equals("")) y = TimeUnit.MINUTES.toMillis(Long.parseLong(minutesText.toString()));
+                    if(!secondsText.toString().equals("")) z = TimeUnit.SECONDS.toMillis(Long.parseLong(secondsText.toString()));
+
+                    SharedPreferences.Editor editor = getSharedPreferences("times", MODE_PRIVATE).edit();
+
+                    editor.putLong(key, x + y + z);
+                    editor.apply();
+
+                    setResult(RESULT_OK);
+                    finish();
+                }
+            }
+        });
     }
 }
