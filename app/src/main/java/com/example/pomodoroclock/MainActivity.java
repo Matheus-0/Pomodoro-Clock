@@ -48,7 +48,12 @@ public class MainActivity extends AppCompatActivity {
         breakTime = settings.getLong("breakTimeSet", DEFAULT_BREAK_TIME);
 
         millisLeft = (isBreak) ? breakTime : startTime;
+        onStart();
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
         defineProgress();
         updateTimerProgress();
 
