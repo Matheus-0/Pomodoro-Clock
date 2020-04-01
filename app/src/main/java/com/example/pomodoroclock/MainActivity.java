@@ -19,11 +19,9 @@ import android.widget.Toast;
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
-    boolean isTimeRunning = false, isBreak = false;
-    final static long DEFAULT_WORKING_TIME = 1500000;
-    final static long DEFAULT_BREAK_TIME = 300000;
-    long startTime, breakTime;
-    long millisLeft;
+    boolean isTimeRunning = false, isBreak = false, firstTime = true;
+    static long DEFAULT_WORKING_TIME, DEFAULT_BREAK_TIME;
+    long startTime, breakTime, millisLeft;
     ImageButton resumePauseButton, resetButton;
     CountDownTimer timer;
     ProgressBar timerProgressBar;
@@ -44,10 +42,17 @@ public class MainActivity extends AppCompatActivity {
 
         settings = getApplicationContext().getSharedPreferences("times", MODE_PRIVATE);
 
-        startTime = settings.getLong("startTimeSet", DEFAULT_WORKING_TIME);
-        breakTime = settings.getLong("breakTimeSet", DEFAULT_BREAK_TIME);
+        if(firstTime){
+            startTime = 5000;
+            breakTime = 2000;
+        }
+        else{
+            startTime = settings.getLong("startTimeSet", DEFAULT_WORKING_TIME);
+            breakTime = settings.getLong("breakTimeSet", DEFAULT_BREAK_TIME);
+        }
 
         millisLeft = (isBreak) ? breakTime : startTime;
+        firstTime = false;
         onStart();
     }
 
