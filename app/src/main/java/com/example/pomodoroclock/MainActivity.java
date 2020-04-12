@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
@@ -14,21 +16,21 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
-    boolean isTimeRunning = false, isBreak = false, firstTime = true;
+    boolean isTimeRunning = false, isBreak = false;
     final static long DEFAULT_WORKING_TIME = 1500000, DEFAULT_BREAK_TIME = 300000;
     static long startTime, breakTime, millisLeft;
     ImageButton resumePauseButton, resetButton;
     CountDownTimer timer;
     ProgressBar timerProgressBar;
-    SharedPreferences settings;
     TextView timerText;
     Vibrator vibrator;
+    private Uri notification;
+    Ringtone ringtone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,16 +42,13 @@ public class MainActivity extends AppCompatActivity {
         timerProgressBar = findViewById(R.id.progressBar);
         timerText = findViewById(R.id.textView);
         vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+        ringtone = RingtoneManager.getRingtone(getApplicationContext(), notification);
 
-        //settings = getApplicationContext().getSharedPreferences("times", MODE_PRIVATE);
-
-        if(firstTime){
-            startTime = DEFAULT_WORKING_TIME;
-            breakTime = DEFAULT_BREAK_TIME;
-        }
+        startTime = DEFAULT_WORKING_TIME;
+        breakTime = DEFAULT_BREAK_TIME;
 
         millisLeft = (isBreak) ? breakTime : startTime;
-        firstTime = false;
+
         onStart();
     }
 
@@ -98,10 +97,6 @@ public class MainActivity extends AppCompatActivity {
                 breakIntent.putExtra("breakTime", breakTime);
                 breakIntent.putExtra("requestCode", 20);
                 startActivityForResult(breakIntent, 20);
-
-                return true;
-            case R.id.setSound:
-                Toast.makeText(this, "Okay", Toast.LENGTH_SHORT).show();
 
                 return true;
         }
@@ -186,6 +181,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void alertTimerFinish() {
         vibrator.vibrate(1000);
+        ringtone.play();
     }
 
     private void changeTimerType() {
