@@ -10,11 +10,11 @@
     <string name="default_time">25:00</string>
     <string name="button_default">Start</string>
     <string name="set_alarm_sound">Set alarm sound</string>
-    <string name="done_button">Done</string>
+    <string name="done_button">Set</string>
     <string name="hour_hint">Hours</string>
     <string name="minute_hint">Minutes</string>
     <string name="second_hint">Seconds</string>
     <string name="worker_icon">Worker</string>
-    <string name="error_edit_text">Can\'t be all empty!</string>
-    <string name="all_zeros">Fields can\'t be all zeros</string>
+    <string name="error_edit_text">Fields can\'t be all empty!</string>
+    <string name="all_zeros">Fields can\'t be all zeros!</string>
 </resources>

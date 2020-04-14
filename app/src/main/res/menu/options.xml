@@ -6,7 +6,4 @@
     <item
         android:id="@+id/breakTimerOption"
         android:title="@string/break_timer_option" />
-    <item
-        android:id="@+id/setSound"
-        android:title="@string/set_alarm_sound"/>
 </menu>

@@ -3,7 +3,6 @@ package com.example.pomodoroclock;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.Editable;
@@ -25,6 +24,7 @@ public class SetTimeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.set_time);
 
         hours = findViewById(R.id.hoursBox);
@@ -66,36 +66,37 @@ public class SetTimeActivity extends AppCompatActivity {
                 Editable secondsText = seconds.getText();
 
                 boolean any = false;
+
                 String errorMessage = getString(R.string.error_edit_text);
                 String allZeros = getString(R.string.all_zeros);
 
-                if(TextUtils.isEmpty(hoursText) && TextUtils.isEmpty(minutesText) && TextUtils.isEmpty(secondsText)){
+                if (TextUtils.isEmpty(hoursText) && TextUtils.isEmpty(minutesText) && TextUtils.isEmpty(secondsText)) {
                     hours.setError(errorMessage);
                     minutes.setError(errorMessage);
                     seconds.setError(errorMessage);
+
                     any = true;
                 }
 
-                if(hoursText.toString().equals("0") && minutesText.toString().equals("0") && secondsText.toString().equals("0")){
+                if (hoursText.toString().equals("0") && minutesText.toString().equals("0") && secondsText.toString().equals("0")) {
                     hours.setError(allZeros);
                     minutes.setError(allZeros);
                     seconds.setError(allZeros);
+
                     any = true;
                 }
 
                 if (!any) {
-                    if(!hoursText.toString().equals("")) x = TimeUnit.HOURS.toMillis(Long.parseLong(hoursText.toString()));
-                    if(!minutesText.toString().equals("")) y = TimeUnit.MINUTES.toMillis(Long.parseLong(minutesText.toString()));
-                    if(!secondsText.toString().equals("")) z = TimeUnit.SECONDS.toMillis(Long.parseLong(secondsText.toString()));
+                    if (!hoursText.toString().equals("")) x = TimeUnit.HOURS.toMillis(Long.parseLong(hoursText.toString()));
+                    if (!minutesText.toString().equals("")) y = TimeUnit.MINUTES.toMillis(Long.parseLong(minutesText.toString()));
+                    if (!secondsText.toString().equals("")) z = TimeUnit.SECONDS.toMillis(Long.parseLong(secondsText.toString()));
 
                     Intent result = new Intent();
 
-                    if(key.equals("startTimeSet")) {
+                    if (key.equals("startTimeSet"))
                         result.putExtra("startTime", x + y + z);
-                    }
-                    else {
+                    else
                         result.putExtra("breakTime", x + y + z);
-                    }
 
                     setResult(RESULT_OK, result);
                     finish();

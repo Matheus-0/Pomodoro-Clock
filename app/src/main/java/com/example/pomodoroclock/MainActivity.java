@@ -29,20 +29,22 @@ public class MainActivity extends AppCompatActivity {
     ProgressBar timerProgressBar;
     TextView timerText;
     Vibrator vibrator;
-    private Uri notification;
     Ringtone ringtone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
         resumePauseButton = findViewById(R.id.resumePauseButton);
         resetButton = findViewById(R.id.resetButton);
         timerProgressBar = findViewById(R.id.progressBar);
         timerText = findViewById(R.id.textView);
+
         vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-        ringtone = RingtoneManager.getRingtone(getApplicationContext(), notification);
+
+        ringtone = RingtoneManager.getRingtone(getApplicationContext(), RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
 
         startTime = DEFAULT_WORKING_TIME;
         breakTime = DEFAULT_BREAK_TIME;
@@ -55,14 +57,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
         defineProgress();
         updateTimerProgress();
 
         resumePauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isTimeRunning) pauseTimer();
-                else startTimer();
+                if (isTimeRunning)
+                    pauseTimer();
+                else
+                    startTimer();
             }
         });
 
@@ -100,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
 
                 return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -140,11 +146,13 @@ public class MainActivity extends AppCompatActivity {
         if (resultCode == RESULT_OK) {
             if (requestCode == 10) {
                 startTime = Objects.requireNonNull(data.getExtras()).getLong("startTime");
+
                 resetTimer();
                 defineProgress();
             }
             else if (requestCode == 20) {
                 breakTime = Objects.requireNonNull(data.getExtras()).getLong("breakTime");
+
                 resetTimer();
                 defineProgress();
             }
@@ -159,6 +167,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTick(long millisUntilFinished) {
                 millisLeft = millisUntilFinished;
+
                 updateTimerProgress();
             }
 
@@ -191,6 +200,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void destroyTimer() {
         timer.cancel();
+
         isTimeRunning = false;
     }
 
