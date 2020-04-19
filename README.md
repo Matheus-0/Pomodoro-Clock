@@ -1,6 +1,6 @@
 # Pomodoro Clock
 
-A simple Android app made in Java for starting Android development in order to learn this paradigm 
+A simple Android app made in Java for starting Android development in order to learn this paradigm.
 
 ### Prerequisites
 
