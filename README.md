@@ -14,7 +14,7 @@ To do this project we needed to know/learn:
 ### Run on a real device :iphone:
 Set up your device as follows:
 
-1. Connect your device to your development machine with a USB cable. If you develop on Windows, you might need to install the appropriate <a href="https://developer.android.com/studio/run/oem-usb">USB Drive</a> for your device.
+1. Connect your device to your development machine with a USB cable. If you develop on Windows, you might need to install the appropriate [USB Drive](https://developer.android.com/studio/run/oem-usb) for your device.
 
 2. Perform the following steps to enable USB debugging in the Developer options window:
 
@@ -29,14 +29,13 @@ Run the app on your device as follows:
 
 1. In Android Studio, select your app from the run/debug configurations drop-down menu in the toolbar.
 2. In the toolbar, select the device that you want to run your app on from the target device drop-down menu.
-3. Click Run :white_check_mark:
+3. Click Run! :white_check_mark:
 
 ## Built With
 
 * [Android Studio](https://developer.android.com/studio)
 
+## Made By
 
-## Made by
-
-* **Matheus Alves**
-* **Hércules de Sousa**
+* [**Matheus Alves**](https://github.com/Dywyll)
+* [**Hércules de Sousa**](https://github.com/HailKing)
