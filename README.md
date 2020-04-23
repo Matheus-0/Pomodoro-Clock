@@ -9,6 +9,12 @@ To do this project we needed to know/learn:
 * Java
 * Android Lifecycle
 
+## Download
+
+You can download the APK from [here](https://github.com/Dywyll/Pomodoro-Clock/releases/download/v1.0.0/app.apk).
+
+You can also check out the releases section of this repository where you can find the APK file and source code in compressed files.
+
 ## Deployment (in Android Studio)
 
 ### Run on a real device :iphone:
