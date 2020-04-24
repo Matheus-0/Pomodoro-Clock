@@ -43,5 +43,5 @@ Run the app on your device as follows:
 
 ## Made By
 
-* [**Matheus Alves**](https://github.com/Dywyll)
-* [**Hércules de Sousa**](https://github.com/HailKing)
+* [Matheus Alves](https://github.com/Dywyll)
+* [Hércules de Sousa](https://github.com/HailKing)
