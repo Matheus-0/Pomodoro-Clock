@@ -2,8 +2,6 @@
 
 A simple Android app made in Java for starting Android development in order to learn this paradigm.
 
-### Prerequisites
-
 To do this project we needed to know/learn:
   
 * Java
@@ -41,13 +39,13 @@ Run the app on your device as follows:
 
 * [Android Studio](https://developer.android.com/studio)
 
-## Made By
+## Authors
 
-<table align="center" width="100%">
+<table width="100%">
   <tr>
-    <td align="center">
+    <td align="center" width="500">
       <a href="https://github.com/Dywyll">
-        <img src="https://avatars3.githubusercontent.com/u/57298342?s=400&u=d871893b24a05d395aaa0159649a09f70553ba76&v=4" height="auto" width="270" style="border-radius: 50%">
+        <img src="https://avatars3.githubusercontent.com/u/57298342?s=400&u=d871893b24a05d395aaa0159649a09f70553ba76&v=4" height="auto" width="250" style="border-radius: 50%">
       </a>
       <h3>Matheus Alves</h3>
       <p>
@@ -56,9 +54,9 @@ Run the app on your device as follows:
         Majoring in Computer Engineering at IFPB
       </p>
     </td>
-    <td align="center">
+    <td align="center" width="500">
       <a href="https://github.com/HailKing">
-        <img src="https://avatars1.githubusercontent.com/u/49170152?s=400&u=76eb45e9504e41bd9da8ff8f9116cc121c01f758&v=4" height="auto" width="270" style="border-radius: 50%">
+        <img src="https://avatars1.githubusercontent.com/u/49170152?s=400&u=76eb45e9504e41bd9da8ff8f9116cc121c01f758&v=4" height="auto" width="250" style="border-radius: 50%">
       </a>
       <h3>Hércules de Sousa</h3>
       <p>
