@@ -43,18 +43,29 @@ Run the app on your device as follows:
 
 ## Made By
 
-<table style="width:100%">
-
+<table align="center" width="100%">
   <tr>
-    <td align="center"><a href="https://github.com/Dywyll"><img src="https://avatars3.githubusercontent.com/u/57298342?s=400&u=d871893b24a05d395aaa0159649a09f70553ba76&v=4" height="auto" width="300" style="border-radius:50%"></a>
-<h3>Matheus Alves</h3>
-<p>Desenvolvedor<br>Graduando em   
-Engenharia de Computação - IFPB</p></td>
-
-<td align="center"><a href="https://github.com/HailKing"><img src="https://avatars1.githubusercontent.com/u/49170152?s=400&u=76eb45e9504e41bd9da8ff8f9116cc121c01f758&v=4" height="auto" width="300" style="border-radius:50%"></a>
-<h3>Hércules de Sousa</h3>
-<p>Desenvolvedor<br>Graduando em   
-Engenharia de Computação - IFPB</p></td>
-
+    <td align="center">
+      <a href="https://github.com/Dywyll">
+        <img src="https://avatars3.githubusercontent.com/u/57298342?s=400&u=d871893b24a05d395aaa0159649a09f70553ba76&v=4" height="auto" width="270" style="border-radius: 50%">
+      </a>
+      <h3>Matheus Alves</h3>
+      <p>
+        Developer
+        <br>
+        Majoring in Computer Engineering at IFPB
+      </p>
+    </td>
+    <td align="center">
+      <a href="https://github.com/HailKing">
+        <img src="https://avatars1.githubusercontent.com/u/49170152?s=400&u=76eb45e9504e41bd9da8ff8f9116cc121c01f758&v=4" height="auto" width="270" style="border-radius: 50%">
+      </a>
+      <h3>Hércules de Sousa</h3>
+      <p>
+        Developer
+        <br>
+        Majoring in Computer Engineering at IFPB
+      </p>
+    </td>
   </tr>
 </table>
