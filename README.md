@@ -47,7 +47,7 @@ Run the app on your device as follows:
 
   <tr>
     <td align="center"><a href="https://github.com/Dywyll"><img src="https://avatars3.githubusercontent.com/u/57298342?s=400&u=d871893b24a05d395aaa0159649a09f70553ba76&v=4" height="auto" width="300" style="border-radius:50%"></a>
-<h3>Matheus Silva</h3>
+<h3>Matheus Alves</h3>
 <p>Desenvolvedor<br>Graduando em   
 Engenharia de Computação - IFPB</p></td>
 
