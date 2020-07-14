@@ -45,7 +45,7 @@ Run the app on your device as follows:
   <tr>
     <td align="center" width="500">
       <a href="https://github.com/Dywyll">
-        <img src="https://avatars3.githubusercontent.com/u/57298342?s=400&u=d871893b24a05d395aaa0159649a09f70553ba76&v=4" height="auto" width="250">
+        <img src="https://avatars3.githubusercontent.com/u/57298342?s=400&u=d871893b24a05d395aaa0159649a09f70553ba76&v=4" height="auto" width="175">
       </a>
       <h3>Matheus Alves</h3>
       <p>
@@ -56,7 +56,7 @@ Run the app on your device as follows:
     </td>
     <td align="center" width="500">
       <a href="https://github.com/HailKing">
-        <img src="https://avatars1.githubusercontent.com/u/49170152?s=400&u=76eb45e9504e41bd9da8ff8f9116cc121c01f758&v=4" height="auto" width="250">
+        <img src="https://avatars1.githubusercontent.com/u/49170152?s=400&u=76eb45e9504e41bd9da8ff8f9116cc121c01f758&v=4" height="auto" width="175">
       </a>
       <h3>Hércules de Sousa</h3>
       <p>
