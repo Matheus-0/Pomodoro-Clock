@@ -36,6 +36,6 @@ Run the app on your device as follows:
 
 ## Contributors
 
-<a href="https://github.com/Dywyll/Pomodoro-Clock/graphs/contributors">
-  <img src="https://contributors-img.web.app/image?repo=Dywyll/Pomodoro-Clock" />
+<a href="https://github.com/OneGwynn/Pomodoro-Clock/graphs/contributors">
+  <img src="https://contributors-img.web.app/image?repo=OneGwynn/Pomodoro-Clock" />
 </a>
